@@ -3,7 +3,7 @@
 
 int main() {
 
-	enum MonsterType 
+	enum MonsterType
 	{
 		//orcs, goblins, trolls, ogres, and skeletons
 		MONSTER_ORC,

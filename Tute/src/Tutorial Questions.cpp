@@ -1,53 +1,65 @@
 #include <iostream>
 #include<string>
 
-enum class monsterType {
-	OGRE,
-	DRAGON,
-	ORC,
-	GIANT_SPIDER,
-	SLIME
+enum class errorCode {
+	SUCCESS=0,
+	INVALID_OPERATOR=-1
 };
 
-struct monster {
-	monsterType mtype;
-	std::string name;
-	int health;
+struct calcResult {
+	int value;
+	errorCode errcode;
 };
 
-void printMonster(monster monst);
-
-std::string monstType(monster monst);
+calcResult	calculate(int val1, char op, int val2);
 
 int main() {
-	monster ogre{ monsterType::OGRE, "Mean Ogre",100 };
-	monster slime{ monsterType::SLIME, "Slimy Slime",50 };
+	int a, b;
+	char op;
+	calcResult result{};
 
-	printMonster(ogre);
-	printMonster(slime);
+	std::cout << "Enter expression a <operator> b: ";
+	std::cin >> a >> op >> b;
+
+	result = calculate(a, op, b);
+
+	if (result.errcode == errorCode::INVALID_OPERATOR)
+		std::cout << std::endl << "An invalid operator was entered." << std::endl;
+	else
+		std::cout << std::endl << result.value;
+	std::cin.ignore(32767, '\n');
 	std::cin.get();
-
+	
 	return 0;
 }
 
-void printMonster(monster monst) {
-	std::cout << "My name is " << monst.name << " and I am a monster of type " << monstType(monst) << " and I have " << monst.health << " health" << std::endl;
-}
+calcResult	calculate(int val1, char op, int val2) {
+	calcResult result{};
 
-std::string monstType(monster monst) {
-	switch (monst.mtype)
+	switch (op)
 	{
-	case monsterType::OGRE:
-		return "Ogre";
-	case monsterType::DRAGON:
-		return "Dragon";
-	case monsterType::GIANT_SPIDER:
-		return "Giant Spider";
-	case monsterType::ORC:
-		return "Orc";
-	case monsterType::SLIME:
-		return "Slime";
+	case '+':
+		result.value= (val1 + val2);
+		result.errcode = errorCode::SUCCESS;
+		return result;
+	case '-':
+		result.value = (val1 - val2);
+		result.errcode = errorCode::SUCCESS;
+		return result;
+	case '*':
+		result.value = (val1 * val2);
+		result.errcode = errorCode::SUCCESS;
+		return result;
+	case '/':
+		result.value = (val1 / val2);
+		result.errcode = errorCode::SUCCESS;
+		return result;
+	case '%':
+		result.value = (val1 % val2);
+		result.errcode = errorCode::SUCCESS;
+		return result;
 	default:
-		return "Unknown type";
+		result.errcode = errorCode::INVALID_OPERATOR;
+		return result;
 	}
 }

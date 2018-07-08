@@ -1,65 +1,59 @@
 #include <iostream>
 #include<string>
 
-enum class errorCode {
-	SUCCESS=0,
-	INVALID_OPERATOR=-1
+enum class animalType {
+	PIG,
+	CHICKEN,
+	GOAT,
+	CAT,
+	DOG,
+	OSTRICH
 };
 
-struct calcResult {
-	int value;
-	errorCode errcode;
+struct animal
+{
+	animalType type;
+	int noOfLegs;
 };
 
-calcResult	calculate(int val1, char op, int val2);
+std::string	getAnimalName(animal anim);
+
+int getNumberOfLegs(animal anim);
 
 int main() {
-	int a, b;
-	char op;
-	calcResult result{};
 
-	std::cout << "Enter expression a <operator> b: ";
-	std::cin >> a >> op >> b;
+	animal pussy{ animalType::CAT,4 };
+	animal chook{ animalType::CHICKEN,2 };
 
-	result = calculate(a, op, b);
+	std::cout << "A " << getAnimalName(pussy) << " has " << pussy.noOfLegs << " legs." << std::endl;
+	std::cout << "A " << getAnimalName(chook) << " has " << chook.noOfLegs << " legs." << std::endl;
 
-	if (result.errcode == errorCode::INVALID_OPERATOR)
-		std::cout << std::endl << "An invalid operator was entered." << std::endl;
-	else
-		std::cout << std::endl << result.value;
-	std::cin.ignore(32767, '\n');
 	std::cin.get();
-	
+
+
 	return 0;
 }
 
-calcResult	calculate(int val1, char op, int val2) {
-	calcResult result{};
-
-	switch (op)
+std::string	getAnimalName(animal anim) {
+	switch (anim.type)
 	{
-	case '+':
-		result.value= (val1 + val2);
-		result.errcode = errorCode::SUCCESS;
-		return result;
-	case '-':
-		result.value = (val1 - val2);
-		result.errcode = errorCode::SUCCESS;
-		return result;
-	case '*':
-		result.value = (val1 * val2);
-		result.errcode = errorCode::SUCCESS;
-		return result;
-	case '/':
-		result.value = (val1 / val2);
-		result.errcode = errorCode::SUCCESS;
-		return result;
-	case '%':
-		result.value = (val1 % val2);
-		result.errcode = errorCode::SUCCESS;
-		return result;
+	case animalType::CAT:
+		return "cat";
+	case animalType::DOG:
+		return "dog";
+	case animalType::PIG:
+		return "pig";
+	case animalType::CHICKEN:
+		return "chicken";
+	case animalType::OSTRICH:
+		return "ostrich";
+	case animalType::GOAT:
+		return "goat";
 	default:
-		result.errcode = errorCode::INVALID_OPERATOR;
-		return result;
+		return "unknown animal";
 	}
+}
+
+int getNumberOfLegs(animal anim) {
+	return anim.noOfLegs;
 }

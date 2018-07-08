@@ -1,30 +1,30 @@
 #include <iostream>
 #include<string>
 
-struct advertising {
-	int noOfAdsShown = 0;
-	int perOfAdsClicked = 0;
-	float earningsPerClick = 0.0;
+struct fraction {
+	float numerator = 0;
+	float denominator = 0;
 };
 
-void showAdDetails(advertising ad);
-
 int main() {
+	fraction frac1{ };
+	fraction frac2{ };
 
-	
-	advertising adType1{ 20,40,.05 };
+	std::cout << "Enter numerator fraction 1: ";
+	std::cin >> frac1.numerator;
 
-	showAdDetails(adType1);
+	std::cout << std::endl << "Enter denominator fraction 1: ";
+	std::cin >> frac1.denominator;
 
+	std::cout << std::endl << "Enter numerator fraction 2: ";
+	std::cin >> frac2.numerator;
 
+	std::cout << std::endl << "Enter denominator fraction 2: ";
+	std::cin >> frac2.denominator;
+
+	std::cout << std::endl << "Product = " << ((frac1.numerator*frac2.numerator) / (frac1.denominator*frac2.denominator)) << std::endl;
+	std::cin.ignore(32767, '\n');
+	std::cin.get();
 
 	return 0;
-}
-
-void showAdDetails(advertising ad) {
-	std::cout << "The number of ads shown = " << ad.noOfAdsShown << std::endl;
-	std::cout << "The percentage of ads clicked = " << ad.perOfAdsClicked << std::endl;
-	std::cout << "The earning per ad = " << ad.earningsPerClick << std::endl;
-	std::cout << "Total earnings = " << ad.noOfAdsShown*ad.perOfAdsClicked/100*ad.earningsPerClick << std::endl;
-	std::cin.get();
 }

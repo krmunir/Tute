@@ -1,17 +1,28 @@
 #include <iostream>
 #include<string>
 
+int sumTo(int val);
 
 int main() {
+	int num{};
 
-	for (int i = 0; i <= 20; ++i)
-	{
-		if (i % 2 == 0)
-			std::cout << i << '\n';
-	}
+	std::cout << "Enter a number: ";
+	std::cin >> num;
+	std::cout << '\n' << "The sum is " << sumTo(num) << '\n';
 
+	std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
 }
 
+int sumTo(int val) {
+	int sum{ 0 };
+
+	for (int i = 1; i <=val; ++i)
+	{
+		sum += i;
+	}
+
+	return sum;
+}

@@ -4,13 +4,12 @@
 
 int main() {
 
-	char character='A';
-
-	while (character <= 'Z') {
-		std::cout << character << " " << static_cast<int> (character) << std::endl;
-		++character;
+	for (int i = 0; i <= 20; ++i)
+	{
+		if (i % 2 == 0)
+			std::cout << i << '\n';
 	}
-	
+
 	std::cin.get();
 
 	return 0;

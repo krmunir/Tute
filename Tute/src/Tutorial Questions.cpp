@@ -1,30 +1,53 @@
 #include <iostream>
 #include<string>
 
-struct fraction {
-	float numerator = 0;
-	float denominator = 0;
+enum class monsterType {
+	OGRE,
+	DRAGON,
+	ORC,
+	GIANT_SPIDER,
+	SLIME
 };
 
+struct monster {
+	monsterType mtype;
+	std::string name;
+	int health;
+};
+
+void printMonster(monster monst);
+
+std::string monstType(monster monst);
+
 int main() {
-	fraction frac1{ };
-	fraction frac2{ };
+	monster ogre{ monsterType::OGRE, "Mean Ogre",100 };
+	monster slime{ monsterType::SLIME, "Slimy Slime",50 };
 
-	std::cout << "Enter numerator fraction 1: ";
-	std::cin >> frac1.numerator;
-
-	std::cout << std::endl << "Enter denominator fraction 1: ";
-	std::cin >> frac1.denominator;
-
-	std::cout << std::endl << "Enter numerator fraction 2: ";
-	std::cin >> frac2.numerator;
-
-	std::cout << std::endl << "Enter denominator fraction 2: ";
-	std::cin >> frac2.denominator;
-
-	std::cout << std::endl << "Product = " << ((frac1.numerator*frac2.numerator) / (frac1.denominator*frac2.denominator)) << std::endl;
-	std::cin.ignore(32767, '\n');
+	printMonster(ogre);
+	printMonster(slime);
 	std::cin.get();
 
 	return 0;
+}
+
+void printMonster(monster monst) {
+	std::cout << "My name is " << monst.name << " and I am a monster of type " << monstType(monst) << " and I have " << monst.health << " health" << std::endl;
+}
+
+std::string monstType(monster monst) {
+	switch (monst.mtype)
+	{
+	case monsterType::OGRE:
+		return "Ogre";
+	case monsterType::DRAGON:
+		return "Dragon";
+	case monsterType::GIANT_SPIDER:
+		return "Giant Spider";
+	case monsterType::ORC:
+		return "Orc";
+	case monsterType::SLIME:
+		return "Slime";
+	default:
+		return "Unknown type";
+	}
 }

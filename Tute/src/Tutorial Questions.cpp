@@ -1,28 +1,53 @@
 #include <iostream>
-#include<string>
+#include "constants.h"
 
-int sumTo(int val);
-
-int main() {
-	int num{};
-
-	std::cout << "Enter a number: ";
-	std::cin >> num;
-	std::cout << '\n' << "The sum is " << sumTo(num) << '\n';
-
-	std::cin.ignore(32767, '\n');
-	std::cin.get();
-
-	return 0;
+// gets initial height from user and returns it
+double getInitialHeight()
+{
+	std::cout << "Enter the height of the tower in meters: ";
+	double initialHeight;
+	std::cin >> initialHeight;
+	return initialHeight;
 }
 
-int sumTo(int val) {
-	int sum{ 0 };
+// Returns height from ground after "secondsPassed" seconds
+double calculateHeight(double initialHeight, int secondsPassed)
+{
+	// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0
+	double distanceFallen = (myConstants::gravity * secondsPassed * secondsPassed) / 2;
+	double currentHeight = initialHeight - distanceFallen;
 
-	for (int i = 1; i <=val; ++i)
+	return currentHeight;
+}
+
+// Prints height every second till ball has reached the ground
+void printHeight(double height, int secondsPassed)
+{
+	if (height > 0.0)
 	{
-		sum += i;
+		std::cout << "At " << secondsPassed << " seconds, the ball is at height:\t" << height <<
+			" meters\n";
 	}
+	else
+		std::cout << "At " << secondsPassed << " seconds, the ball is on the ground.\n";
+}
 
-	return sum;
+void calculateAndPrintHeight(double initialHeight, int secondsPassed)
+{
+	double height = calculateHeight(initialHeight, secondsPassed);
+	printHeight(height, secondsPassed);
+}
+
+int main()
+{
+	const double initialHeight = getInitialHeight();
+
+	calculateAndPrintHeight(initialHeight, 0);
+	calculateAndPrintHeight(initialHeight, 1);
+	calculateAndPrintHeight(initialHeight, 2);
+	calculateAndPrintHeight(initialHeight, 3);
+	calculateAndPrintHeight(initialHeight, 4);
+	calculateAndPrintHeight(initialHeight, 5);
+
+	return 0;
 }

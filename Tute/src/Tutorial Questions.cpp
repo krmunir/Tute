@@ -32,22 +32,35 @@ void printHeight(double height, int secondsPassed)
 		std::cout << "At " << secondsPassed << " seconds, the ball is on the ground.\n";
 }
 
-void calculateAndPrintHeight(double initialHeight, int secondsPassed)
+double calculateAndPrintHeight(double initialHeight, int secondsPassed)
 {
 	double height = calculateHeight(initialHeight, secondsPassed);
+
 	printHeight(height, secondsPassed);
+
+	return height;
 }
 
 int main()
 {
 	const double initialHeight = getInitialHeight();
+	double height{};
+	int time{};
 
-	calculateAndPrintHeight(initialHeight, 0);
+	do
+	{
+		height =calculateAndPrintHeight(initialHeight, time);
+		++time;
+	} while (height>0);
+	std::cin.ignore(32767, '\n');
+	std::cin.get();
+
+	/*calculateAndPrintHeight(initialHeight, 0);
 	calculateAndPrintHeight(initialHeight, 1);
 	calculateAndPrintHeight(initialHeight, 2);
 	calculateAndPrintHeight(initialHeight, 3);
 	calculateAndPrintHeight(initialHeight, 4);
-	calculateAndPrintHeight(initialHeight, 5);
+	calculateAndPrintHeight(initialHeight, 5);*/
 
 	return 0;
 }

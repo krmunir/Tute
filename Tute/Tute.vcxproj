@@ -21,9 +21,6 @@
   <ItemGroup>
     <ClCompile Include="src\Tutorial Questions.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\constants.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{61F23A6C-C28B-423F-919B-19A60A4417A2}</ProjectGuid>

@@ -1,66 +1,54 @@
 #include <iostream>
-#include "constants.h"
-
-// gets initial height from user and returns it
-double getInitialHeight()
-{
-	std::cout << "Enter the height of the tower in meters: ";
-	double initialHeight;
-	std::cin >> initialHeight;
-	return initialHeight;
-}
-
-// Returns height from ground after "secondsPassed" seconds
-double calculateHeight(double initialHeight, int secondsPassed)
-{
-	// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0
-	double distanceFallen = (myConstants::gravity * secondsPassed * secondsPassed) / 2;
-	double currentHeight = initialHeight - distanceFallen;
-
-	return currentHeight;
-}
-
-// Prints height every second till ball has reached the ground
-void printHeight(double height, int secondsPassed)
-{
-	if (height > 0.0)
-	{
-		std::cout << "At " << secondsPassed << " seconds, the ball is at height:\t" << height <<
-			" meters\n";
-	}
-	else
-		std::cout << "At " << secondsPassed << " seconds, the ball is on the ground.\n";
-}
-
-double calculateAndPrintHeight(double initialHeight, int secondsPassed)
-{
-	double height = calculateHeight(initialHeight, secondsPassed);
-
-	printHeight(height, secondsPassed);
-
-	return height;
-}
+#include <string>
 
 int main()
 {
-	const double initialHeight = getInitialHeight();
-	double height{};
-	int time{};
+	int array[] { 4, 6, 7, 3, 8, 2, 1, 9, 5 };
+	int searchVal {};
 
+	bool isInvalidEntry = false;
 	do
 	{
-		height =calculateAndPrintHeight(initialHeight, time);
-		++time;
-	} while (height>0);
+		isInvalidEntry = false;
+		std::cout << "Enter an integer between 1 and 9: ";
+		std::cin >> searchVal;
+
+		// if the user entered something invalid
+		if (std::cin.fail())
+		{
+			isInvalidEntry = true;
+			std::cin.clear(); // reset any error flags
+			std::cin.ignore(32767, '\n'); // ignore any characters in the input buffer
+		}
+
+		//also invalid if not between 1 and 9
+		else if ((searchVal < 1) || (searchVal>9))
+			isInvalidEntry = true;
+
+	} while (isInvalidEntry);
+
+	//print whole array
+	for (int i = 0; i < 9; ++i)
+	{
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
+	for (const int &val : array)
+		std::cout << val << " ";
+
+	//find search value 
+	int arrayIndex{ 0 };
+	for (const int &val : array) {
+		if (val == searchVal) {
+			std::cout << std::endl<<searchVal << " found at array index " << arrayIndex;
+			break;
+		}
+		else ++arrayIndex;
+	}
+
+	//pause output window
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
-
-	/*calculateAndPrintHeight(initialHeight, 0);
-	calculateAndPrintHeight(initialHeight, 1);
-	calculateAndPrintHeight(initialHeight, 2);
-	calculateAndPrintHeight(initialHeight, 3);
-	calculateAndPrintHeight(initialHeight, 4);
-	calculateAndPrintHeight(initialHeight, 5);*/
 
 	return 0;
 }

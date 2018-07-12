@@ -2,37 +2,15 @@
 #include <iostream>
 #include <string>
 
-struct studentDetails
-{
-	std::string firstName{};
-	int grade{};
-};
+void swap(int &x, int &y);
 
 int main()
 {
-	int numStudents{};
-	std::cout << "How many students do you want to enter? ";
-	std::cin >> numStudents;
+	int a{ 4 }, b{ 9 };
 
-	//dynamically create array 'students' to hold student info
-	studentDetails *students = new studentDetails[numStudents];
-
-	//enter student details
-	for (int i = 0; i < numStudents; ++i)
-	{
-		std::cout << "Enter name of student " << (i + 1) << ": ";
-		std::cin >> students[i].firstName;
-
-		std::cout << "Enter grade of student " << (i + 1) << ": ";
-		std::cin >> students[i].grade;
-		std::cout << std::endl;
-	}
-
-	//print out student details
-	for (int i = 0; i < numStudents; ++i)
-	{
-		std::cout << students[i].firstName << " received a grade of " << students[i].grade << std::endl;
-	}
+	std::cout << "before swap" << a << " " << b << std::endl;
+	swap(a, b);
+	std::cout << "after swap" << a << " " << b << std::endl;
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -40,3 +18,9 @@ int main()
 	return 0;
 }
 
+void swap(int &x, int &y) {
+	int temp{};
+	temp = x;
+	x = y;
+	y = temp;
+}

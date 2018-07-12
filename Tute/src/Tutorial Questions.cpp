@@ -2,23 +2,37 @@
 #include <iostream>
 #include <string>
 
-namespace item {
-	enum item {
-		HEALTH_POTIONS,
-		TORCHES,
-		ARROWS,
-		MAX_ITEMS
-	};
-
-}
-
-int countTotalItems(int *itemsArray);
+struct studentDetails
+{
+	std::string firstName{};
+	int grade{};
+};
 
 int main()
 {
-	int    itemsCarried[item::MAX_ITEMS]{ 2,5,10 };
-	
-	std::cout << "No of items carried = " << countTotalItems(itemsCarried);
+	int numStudents{};
+	std::cout << "How many students do you want to enter? ";
+	std::cin >> numStudents;
+
+	//dynamically create array 'students' to hold student info
+	studentDetails *students = new studentDetails[numStudents];
+
+	//enter student details
+	for (int i = 0; i < numStudents; ++i)
+	{
+		std::cout << "Enter name of student " << (i + 1) << ": ";
+		std::cin >> students[i].firstName;
+
+		std::cout << "Enter grade of student " << (i + 1) << ": ";
+		std::cin >> students[i].grade;
+		std::cout << std::endl;
+	}
+
+	//print out student details
+	for (int i = 0; i < numStudents; ++i)
+	{
+		std::cout << students[i].firstName << " received a grade of " << students[i].grade << std::endl;
+	}
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -26,11 +40,3 @@ int main()
 	return 0;
 }
 
-int countTotalItems(int *itemsArray) {
-	int totalItems{};
-	for (int i = 0; i < item::MAX_ITEMS; ++i)
-	{
-		totalItems += itemsArray[i];
-	}
-	return totalItems;
-}

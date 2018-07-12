@@ -2,15 +2,17 @@
 #include <iostream>
 #include <string>
 
-void swap(int &x, int &y);
 
 int main()
 {
-	int a{ 4 }, b{ 9 };
+	const char *cStyleString = "Hello world!";
+	int i{ 0 };
 
-	std::cout << "before swap" << a << " " << b << std::endl;
-	swap(a, b);
-	std::cout << "after swap" << a << " " << b << std::endl;
+	do
+	{
+		std::cout << cStyleString[i];
+		++i;
+	} while (cStyleString[i] !='\0');
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -18,9 +20,3 @@ int main()
 	return 0;
 }
 
-void swap(int &x, int &y) {
-	int temp{};
-	temp = x;
-	x = y;
-	y = temp;
-}

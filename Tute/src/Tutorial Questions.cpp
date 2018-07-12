@@ -6,7 +6,8 @@ namespace item {
 	enum item {
 		HEALTH_POTIONS,
 		TORCHES,
-		ARROWS
+		ARROWS,
+		MAX_ITEMS
 	};
 
 }
@@ -15,7 +16,7 @@ int countTotalItems(int *itemsArray);
 
 int main()
 {
-	int    itemsCarried[3]{ 2,5,10 };
+	int    itemsCarried[item::MAX_ITEMS]{ 2,5,10 };
 	
 	std::cout << "No of items carried = " << countTotalItems(itemsCarried);
 
@@ -27,7 +28,7 @@ int main()
 
 int countTotalItems(int *itemsArray) {
 	int totalItems{};
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < item::MAX_ITEMS; ++i)
 	{
 		totalItems += itemsArray[i];
 	}

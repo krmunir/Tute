@@ -1,4 +1,4 @@
-#include <algorithm> // for std::swap, use <utility> instead if C++11
+#include <utility> // for std::swap, use <utility> instead if C++11
 #include <iostream>
 #include <string>
 #include <array>
@@ -36,32 +36,53 @@ struct card
 	rank cardRank;
 };
 
+enum class gameResult {
+	PLAYER_WINS,
+	DEALER_WINS,
+	GAME_IN_PROGRESS
+};
+
+enum class play {
+	HIT,
+	STAND
+} response;
+
+
 void printCard(const card &c);
 void initialiseDeck(std::array<card, 52> &deck);
 void printDeck(const std::array<card,52> &deck);
 void swapCard(card &card1, card &card2);
 void shuffleDeck(std::array<card, 52> &deck);
 int getCardValue(const card &c);
+gameResult playBlackjack(std::array<card, 52> &deck);
+//void dealCard(std::array<card, 52> &deck, card *deckCardPtr, )
+play hitOrStand();
+
+int playerScore{ 0 };
+int dealerScore{ 0 };
+
 
 int main()
 {
 	
 	std::array<card, 52> deck;
-
+	gameResult result{ gameResult::GAME_IN_PROGRESS };
 	initialiseDeck(deck);
-
-	/*for (int i = 0; i < 52; ++i)
-	{
-		printCard(deck[i]);
-		std::cout << " ";
-	}*/
-
-	printDeck(deck);
-
 	shuffleDeck(deck);
 
-	std::cout << std::endl << std::endl;
-	printDeck(deck);
+	result = playBlackjack(deck);
+	switch (result)
+	{
+	case gameResult::PLAYER_WINS:
+		std::cout << "You win!";
+		break;
+	case gameResult::DEALER_WINS:
+		std::cout << "Dealer wins!";
+		break;
+	default:
+		std::cout << "Unknown result????";
+		break;
+	}
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -182,14 +203,14 @@ void swapCard(card &card1, card &card2)
 void shuffleDeck(std::array<card, 52> &deck)
 {
 	//set seed for random number generator
-	//std::srand(static_cast<unsigned int> (std::time(0)));
+	std::srand(static_cast<unsigned int> (std::time(0)));
 	//std::srand(std::time(0));
-	std::srand(77777);
+	//std::srand(77777);
 
 	std::rand();
 	for (int i = 0; i < 52; ++i)
 	{
-		int randNum = (std::rand() % 53);
+		int randNum = (std::rand() % 52);
 		swapCard(deck[i], deck[randNum]);
 	}
 
@@ -199,10 +220,131 @@ int getCardValue(const card &c)
 {
 	switch (c.cardRank)
 	{
+	case rank::TWO:
+		return 2;
+	case rank::THREE:
+		return 3;
+	case rank::FOUR:
+		return 4;
+	case rank::FIVE:
+		return 5;
+	case rank::SIX:
+		return 6;
+	case rank::SEVEN:
+		return 7;
+	case rank::EIGHT:
+		return 8;
+	case rank::NINE:
+		return 9;
+	case rank::TEN:
+	case rank::JACK:
+	case rank::QUEEN:
+	case rank::KING:
+		return 10;
+	case rank::ACE:
+		return 11;
+	case rank::MAX_RANKS:
 	default:
-		break;
+		return 0;
 	}
-	return 0;
+}
+
+gameResult playBlackjack(std::array<card, 52> &deck)
+{
+	card *deckCardPtr { &deck[0] };
+	gameResult gameStatus{ gameResult::GAME_IN_PROGRESS };
+
+	//dealer gets one card
+	dealerScore += getCardValue(*deckCardPtr);
+	++deckCardPtr;
+
+	//player gets two cards
+	playerScore += getCardValue(*deckCardPtr);
+	++deckCardPtr;
+	playerScore += getCardValue(*deckCardPtr);
+	++deckCardPtr;
+
+
+	do
+	{
+		//ask player if he wants to hit or stand
+		response = hitOrStand();
+
+		switch (response)
+		{
+		case play::HIT:
+			playerScore += getCardValue(*deckCardPtr);
+			++deckCardPtr;
+			if (playerScore>21	)
+			{
+				std::cout << "Your score is over 21." << std::endl;
+				return gameResult::DEALER_WINS;
+			}
+			else
+			{
+				if (dealerScore<17)
+				{
+					//dealer picks a card
+					dealerScore += getCardValue(*deckCardPtr);
+					++deckCardPtr;
+					if (dealerScore > 21)
+					{
+						std::cout << "Dealer's score is over 21." << std::endl;
+						return gameResult::PLAYER_WINS;
+					}
+				}
+				else {
+					std::cout << "Dealer stands." << std::endl;
+					std::cout << "Dealer's score: " << dealerScore << std::endl;
+					std::cout << "Player's score: " << playerScore << std::endl;
+					if (playerScore > dealerScore)
+						return gameResult::PLAYER_WINS;
+					else
+						return gameResult::DEALER_WINS;
+				}
+
+			}
+			break;
+		case play::STAND:
+			std::cout << "Player stands." << std::endl;
+			std::cout << "Dealer's score: " << dealerScore << std::endl;
+			std::cout << "Player's score: " << playerScore << std::endl;
+			if (playerScore > dealerScore)
+				return gameResult::PLAYER_WINS;
+			else
+				return gameResult::DEALER_WINS;
+		}
+
+	} while (gameStatus==gameResult::GAME_IN_PROGRESS);
+}
+
+play hitOrStand()
+{
+	char input{};
+
+	do
+	{
+		//check hit or stand
+		std::cout << "Dealer's score is " << dealerScore<<std::endl;
+		std::cout << "Your score is " << playerScore<<std::endl;
+		std::cout << "Do you want to (h)it or (s)tand? ";
+		std::cin >> input;
+		switch (input)
+		{
+		case 'h':
+			std::cin.ignore(32767, '\n');
+			return play::HIT;
+			break;
+		case 's':
+			std::cin.ignore(32767, '\n');
+			return play::STAND;
+			break;
+		default:
+			input = 0;
+			break;
+		}
+
+	} while (!input);
 }
 
 

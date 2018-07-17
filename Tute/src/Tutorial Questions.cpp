@@ -5,19 +5,19 @@
 #include <cstdlib>
 #include <ctime>
 
-int factorial(int num);
+
+int sumOfDigits(int num);
 
 int main()
 {
-	std::cout << "3 factorial = " << factorial(3) << std::endl;
-	std::cout << "Should be " << (3 * 2) << std::endl << std::endl;
+	std::cout << "Sum of digits 1234 = " << sumOfDigits(1234) << std::endl;
+	std::cout << "should be = " << (1 + 2 + 3 + 4) << std::endl << std::endl;
 
-	std::cout << "5 factorial = " << factorial(5) << std::endl;
-	std::cout << "Should be " << (5*4*3 * 2) << std::endl << std::endl;
+	std::cout << "Sum of digits 2345 = " << sumOfDigits(2345) << std::endl;
+	std::cout << "should be = " << (2 + 3 + 4+5) << std::endl << std::endl;
 
-	std::cout << "7 factorial = " << factorial(7) << std::endl;
-	std::cout << "Should be " << (7*6*5*4*3 * 2) << std::endl << std::endl;
-
+	std::cout << "Sum of digits 3456 = " << sumOfDigits(3456) << std::endl;
+	std::cout << "should be = " << (3 + 4+5+6) << std::endl << std::endl;
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -25,14 +25,12 @@ int main()
 	return 0;
 }
 
-int factorial(int num)
+int sumOfDigits(int num)
 {
-
-	if (num > 1)
-		return (num*factorial(num - 1));
-	
-	else 
-		return 1;
-
-	
+	if (num  <10) {
+		return num;
+	}
+	else {	
+		return (num%10+sumOfDigits(num / 10));
+	}
 }

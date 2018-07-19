@@ -4,54 +4,67 @@
 #include <array>
 #include <cstdlib>
 #include <ctime>
-
+#include <cassert>
 
 int main()
 {
-	class Point3d {
+
+	class Stack {
 	public:
-		float m_x{ 0 };
-		float m_y{ 0 };
-		float m_z{ 0 };
-
-		void setValues(float a, float b, float c) {
-			m_x = a;
-			m_y = b;
-			m_z = c;
+		void reset() {
+			length = 0;
+			for (int val : array)
+				val = 0;
 		}
-		
+
+		bool push(int a) {
+			if (length == 10)
+				return false; //stack full
+			else {
+				array[length] = a;
+				++length; //increment length to point to next vacant position in stack
+			}
+		}
+
+		int pop() {
+			assert(length != 0);
+			--length;
+			return array[length];
+		}
+
 		void print() {
-			std::cout << "<" << m_x<< ", " << m_y << ", " << m_z << ">" << std::endl;
+						
+			std::cout << "( ";
+
+			for (int i = 0; i < length; ++i)
+				std::cout << array[i] << " ";
+
+			std::cout << ")"<<std::endl;
+
 		}
 
-		bool isEqual(Point3d p) {
-			if ((p.m_x == m_x) && (p.m_y == m_y) && (p.m_z == m_z))
-				return true;
-			else
-				return false;
-		}
+	private:
+		int array[10]{ 0 };
+		int length{ 0 };
 	};
 
-	
+	Stack stack;
+	stack.reset();
 
-	Point3d point1;
-	point1.setValues(1.0, 2.0, 3.0);
+	stack.print();
 
-	Point3d point2;
-	point2.setValues(1.0, 2.0, 3.0);
+	stack.push(5);
+	stack.push(3);
+	stack.push(8);
+	stack.print();
 
-	if (point1.isEqual(point2))
-		std::cout << "point1 and point2 are equal\n";
-	else
-		std::cout << "point1 and point2 are not equal\n";
+	stack.pop();
+	stack.print();
 
-	Point3d point3;
-	point3.setValues(3.0, 4.0, 5.0);
+	stack.pop();
+	stack.pop();
 
-	if (point1.isEqual(point3))
-		std::cout << "point1 and point3 are equal\n";
-	else
-		std::cout << "point1 and point3 are not equal\n";
+	stack.print();
 
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();

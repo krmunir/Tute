@@ -12,17 +12,18 @@
 // binarySearch() should return the index of the target element if the target is found, -1 otherwise
 int binarySearch(int *array, int target, int min, int max)
 {
-	int currIndex;
-	do
+	int currIndex{};
+
+	while(min<=max)
 	{
 		currIndex = min+((max - min)/2);
 		if (array[currIndex] == target)
 			return currIndex; //target found
 		else if (array[currIndex] < target)
-			min = currIndex;
+			min = currIndex+1;
 		else if (array[currIndex] > target)
-			max = currIndex;
-	} while (currIndex>min);
+			max = currIndex-1;
+	};
 	return -1; //target not found
 }
 

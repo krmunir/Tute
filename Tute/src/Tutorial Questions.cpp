@@ -8,32 +8,32 @@
 
 int main()
 {
-	class IntPair {
+	class Point3d {
 	public:
-		int a{ 0 };
-		int b{ 0 };
+		float m_x{ 0 };
+		float m_y{ 0 };
+		float m_z{ 0 };
 
-		void set(int x, int y) {
-			a = x;
-			b = y;
+		void setValues(float a, float b, float c) {
+			m_x = a;
+			m_y = b;
+			m_z = c;
 		}
-
+		
 		void print() {
-			std::cout << a << " " << b << std::endl;
+			std::cout << "<" << m_x<< ", " << m_y << ", " << m_z << ">" << std::endl;
 		}
+
 	};
 
-	IntPair p1;
-	p1.set(1, 1); // set p1 values to (1, 1)
+	
 
-	IntPair p2{ 2, 2 }; // initialize p2 values to (2, 2)
+	Point3d point;
+	point.setValues(1.0, 2.0, 3.0);
 
-	p1.print();
-	p2.print();
+	point.print();
 
-
-
-	std::cin.ignore(32767, '\n');
+	//std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;

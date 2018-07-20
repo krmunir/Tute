@@ -20,12 +20,16 @@ int main()
 		Colour m_colour{ Colour::black };
 		float m_radius{ 10.0 };
 	public:
-		Ball(Colour col = Colour::black, float rad = 10.0) {
+		Ball() {};
+		Ball(Colour col) {
 			m_colour = col;
+		}
+		Ball(float rad) {
 			m_radius = rad;
 		}
-		Ball(float rad = 10.0) {
-				m_radius = rad;
+		Ball(Colour col, float rad) {
+			m_colour = col;
+			m_radius = rad;
 		}
 		void print() {
 			std::cout << "colour: " << static_cast<int> (m_colour) << ", radius: " << m_radius << std::endl;

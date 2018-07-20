@@ -4,33 +4,39 @@
 #include <array>
 #include <cstdlib>
 #include <ctime>
+#include <cassert>
 
-
-int sumOfDigits(int num);
 
 int main()
 {
-	std::cout << "Sum of digits 1234 = " << sumOfDigits(1234) << std::endl;
-	std::cout << "should be = " << (1 + 2 + 3 + 4) << std::endl << std::endl;
+	class RGBA {
+	private:
+		std::uint8_t m_red; 
+		std::uint8_t m_green;
+		std::uint8_t m_blue;
+		std::uint8_t m_alpha;
 
-	std::cout << "Sum of digits 2345 = " << sumOfDigits(2345) << std::endl;
-	std::cout << "should be = " << (2 + 3 + 4+5) << std::endl << std::endl;
+	public:
+		RGBA(std::uint8_t r=0, std::uint8_t g=0, std::uint8_t b=0, std::uint8_t a=255)
+			: m_red{ r },
+			m_green{ g },
+			m_blue{ b },
+			m_alpha{ a }
+		{}
 
-	std::cout << "Sum of digits 3456 = " << sumOfDigits(3456) << std::endl;
-	std::cout << "should be = " << (3 + 4+5+6) << std::endl << std::endl;
+		void print() {
+			std::cout << "r=" << static_cast<int> (m_red) << ", g=" << static_cast<int> (m_green) << ", b=" << static_cast<int> (m_blue) << ", a=" << static_cast<int> (m_alpha);
+		}
+	};
 
-	std::cin.ignore(32767, '\n');
+	RGBA teal(0, 127, 127);
+	teal.print();
+
+
+	//std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
 }
 
-int sumOfDigits(int num)
-{
-	if (num  <10) {
-		return num;
-	}
-	else {	
-		return (num%10+sumOfDigits(num / 10));
-	}
-}
+

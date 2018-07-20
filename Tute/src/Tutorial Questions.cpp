@@ -6,45 +6,32 @@
 #include <ctime>
 #include <cassert>
 
-enum class Colour {
-	black,
-	white,
-	blue,
-	red
-};
 
 int main()
 {
-	class Ball {
+	class RGBA {
 	private:
-		Colour m_colour;
-		float m_radius;
+		std::uint8_t m_red; 
+		std::uint8_t m_green;
+		std::uint8_t m_blue;
+		std::uint8_t m_alpha;
+
 	public:
-		Ball(Colour col = Colour::black, float rad = 10.0) {
-			m_colour = col;
-			m_radius = rad;
-		}
-		Ball(float rad = 10.0) {
-				m_radius = rad;
-				m_colour = Colour::black;
-		}
+		RGBA(std::uint8_t r=0, std::uint8_t g=0, std::uint8_t b=0, std::uint8_t a=255)
+			: m_red{ r },
+			m_green{ g },
+			m_blue{ b },
+			m_alpha{ a }
+		{}
+
 		void print() {
-			std::cout << "colour: " << static_cast<int> (m_colour) << ", radius: " << m_radius << std::endl;
+			std::cout << "r=" << static_cast<int> (m_red) << ", g=" << static_cast<int> (m_green) << ", b=" << static_cast<int> (m_blue) << ", a=" << static_cast<int> (m_alpha);
 		}
-		
 	};
 
-	Ball def;
-	def.print();
+	RGBA teal(0, 127, 127);
+	teal.print();
 
-	Ball blue(Colour::blue);
-	blue.print();
-
-	Ball twenty(20.0);
-	twenty.print();
-
-	Ball blueTwenty(Colour::blue, 20.0);
-	blueTwenty.print();
 
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();

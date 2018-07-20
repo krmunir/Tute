@@ -17,8 +17,8 @@ int main()
 {
 	class Ball {
 	private:
-		Colour m_colour{ Colour::black };
-		float m_radius{ 10.0 };
+		Colour m_colour;
+		float m_radius;
 	public:
 		Ball(Colour col = Colour::black, float rad = 10.0) {
 			m_colour = col;
@@ -26,6 +26,7 @@ int main()
 		}
 		Ball(float rad = 10.0) {
 				m_radius = rad;
+				m_colour = Colour::black;
 		}
 		void print() {
 			std::cout << "colour: " << static_cast<int> (m_colour) << ", radius: " << m_radius << std::endl;

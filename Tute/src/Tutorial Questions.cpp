@@ -6,65 +6,48 @@
 #include <ctime>
 #include <cassert>
 
+enum class Colour {
+	black,
+	white,
+	blue,
+	red
+};
+
 int main()
 {
-
-	class Stack {
-	public:
-		void reset() {
-			length = 0;
-			for (int val : array)
-				val = 0;
-		}
-
-		bool push(int a) {
-			if (length == 10)
-				return false; //stack full
-			else {
-				array[length] = a;
-				++length; //increment length to point to next vacant position in stack
-			}
-		}
-
-		int pop() {
-			assert(length != 0);
-			--length;
-			return array[length];
-		}
-
-		void print() {
-						
-			std::cout << "( ";
-
-			for (int i = 0; i < length; ++i)
-				std::cout << array[i] << " ";
-
-			std::cout << ")"<<std::endl;
-
-		}
-
+	class Ball {
 	private:
-		int array[10]{ 0 };
-		int length{ 0 };
+		Colour m_colour{ Colour::black };
+		float m_radius{ 10.0 };
+	public:
+		Ball() {};
+		Ball(Colour col) {
+			m_colour = col;
+		}
+		Ball(float rad) {
+			m_radius = rad;
+		}
+		Ball(Colour col, float rad) {
+			m_colour = col;
+			m_radius = rad;
+		}
+		void print() {
+			std::cout << "colour: " << static_cast<int> (m_colour) << ", radius: " << m_radius << std::endl;
+		}
+		
 	};
 
-	Stack stack;
-	stack.reset();
+	Ball def;
+	def.print();
 
-	stack.print();
+	Ball blue(Colour::blue);
+	blue.print();
 
-	stack.push(5);
-	stack.push(3);
-	stack.push(8);
-	stack.print();
+	Ball twenty(20.0);
+	twenty.print();
 
-	stack.pop();
-	stack.print();
-
-	stack.pop();
-	stack.pop();
-
-	stack.print();
+	Ball blueTwenty(Colour::blue, 20.0);
+	blueTwenty.print();
 
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();

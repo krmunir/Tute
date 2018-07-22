@@ -7,36 +7,68 @@
 #include <cassert>
 
 
+class Vector3d;
+
+class Point3d
+{
+private:
+	double m_x, m_y, m_z;
+
+public:
+	Point3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+	}
+
+	void print()
+	{
+		std::cout << "Point(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+
+	void moveByVector(const Vector3d &v);
+
+};
+
+class Vector3d
+{
+private:
+	double m_x, m_y, m_z;
+
+public:
+	Vector3d(double x = 0.0, double y = 0.0, double z = 0.0)
+		: m_x(x), m_y(y), m_z(z)
+	{
+	}
+
+	friend void Point3d::moveByVector(const Vector3d &v);
+
+	void print()
+	{
+		std::cout << "Vector(" << m_x << " , " << m_y << " , " << m_z << ")\n";
+	}
+};
+
+void Point3d::moveByVector(const Vector3d &v)
+{
+	// implement this function as a friend of class Vector3d
+	m_x += v.m_x;
+	m_y += v.m_y;
+	m_z += v.m_z;
+}
+
 int main()
 {
-	class RGBA {
-	private:
-		std::uint8_t m_red; 
-		std::uint8_t m_green;
-		std::uint8_t m_blue;
-		std::uint8_t m_alpha;
+	
+	Point3d p(1.0, 2.0, 3.0);
+	Vector3d v(2.0, 2.0, -3.0);
 
-	public:
-		RGBA(std::uint8_t r=0, std::uint8_t g=0, std::uint8_t b=0, std::uint8_t a=255)
-			: m_red{ r },
-			m_green{ g },
-			m_blue{ b },
-			m_alpha{ a }
-		{}
+	p.print();
+	p.moveByVector(v);
+	p.print();
 
-		void print() {
-			std::cout << "r=" << static_cast<int> (m_red) << ", g=" << static_cast<int> (m_green) << ", b=" << static_cast<int> (m_blue) << ", a=" << static_cast<int> (m_alpha);
-		}
-	};
-
-	RGBA teal(0, 127, 127);
-	teal.print();
-
-
+	
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
 }
-
-

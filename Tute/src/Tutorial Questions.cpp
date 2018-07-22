@@ -9,6 +9,8 @@
 #include "Point2d.h"
 
 
+float distanceFrom(Point2d &p1, Point2d &p2);
+
 
 int main()
 {
@@ -26,3 +28,6 @@ int main()
 	return 0;
 }
 
+float distanceFrom(Point2d &p1,Point2d &p2) {
+	return (sqrt((p2.m_x - p1.m_x)*(p2.m_x - p1.m_x) + (p2.m_y - p1.m_y)*(p2.m_y - p1.m_y)));
+}

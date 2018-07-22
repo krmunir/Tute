@@ -9,6 +9,7 @@ private:
 public:
 	Point2d(double x=0.0, double y=0.0) : m_x{ x }, m_y{ y } {}
 	void print();
-	float distanceTo(Point2d &p2);
+	friend float distanceFrom(Point2d &p1, Point2d &p2);
+
 };
 

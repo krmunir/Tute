@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Point3d.cpp" />
     <ClCompile Include="src\Tutorial Questions.cpp" />
+    <ClCompile Include="src\Vector3d.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Point3d.h" />
+    <ClInclude Include="src\Vector3d.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

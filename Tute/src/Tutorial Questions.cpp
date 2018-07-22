@@ -6,20 +6,41 @@
 #include <ctime>
 #include <cassert>
 
-#include "Point2d.h"
 
 
-float distanceFrom(Point2d &p1, Point2d &p2);
+class HelloWorld
+{
+private:
+	char *m_data;
 
+public:
+	HelloWorld()
+	{
+		m_data = new char[14];
+		const char *init = "Hello, World!";
+		for (int i = 0; i < 14; ++i)
+			m_data[i] = init[i];
+	}
+
+	~HelloWorld()
+	{
+		// replace this comment with your destructor implementation
+		delete[] m_data;
+	}
+
+	void print() const
+	{
+		std::cout << m_data;
+	}
+
+};
 
 int main()
 {
 	
-	Point2d first;
-	Point2d second(3.0, 4.0);
-	first.print();
-	second.print();
-	std::cout << "Distance between two points: " << distanceFrom(first, second) << '\n';
+
+	HelloWorld hello;
+	hello.print();
 
 	
 	//std::cin.ignore(32767, '\n');
@@ -28,6 +49,5 @@ int main()
 	return 0;
 }
 
-float distanceFrom(Point2d &p1,Point2d &p2) {
-	return (sqrt((p2.m_x - p1.m_x)*(p2.m_x - p1.m_x) + (p2.m_y - p1.m_y)*(p2.m_y - p1.m_y)));
-}
+
+

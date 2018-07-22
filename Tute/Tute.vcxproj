@@ -19,11 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Point2d.cpp" />
     <ClCompile Include="src\Tutorial Questions.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Point2d.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

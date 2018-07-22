@@ -6,26 +6,21 @@
 #include <ctime>
 #include <cassert>
 
-#include "Point3d.h"
-#include "Vector3d.h"
-
-
+#include "Point2d.h"
 
 
 
 int main()
 {
 	
-	Point3d p(1.0, 2.0, 3.0);
-	Vector3d v(2.0, 2.0, -3.0);
-
-	p.print();
-	p.moveByVector(v);
-	p.print();
-
+	Point2d first;
+	Point2d second(3.0, 4.0);
+	first.print();
+	second.print();
 	
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
 }
+

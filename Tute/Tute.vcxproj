@@ -19,13 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Point3d.cpp" />
+    <ClCompile Include="Point2d.cpp" />
     <ClCompile Include="src\Tutorial Questions.cpp" />
-    <ClCompile Include="src\Vector3d.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Point3d.h" />
-    <ClInclude Include="src\Vector3d.h" />
+    <ClInclude Include="Point2d.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -78,7 +76,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\Kash user\source\repos\Tute\Tute;C:\Users\Kash user\source\repos\Tute\Tute\src;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\Kash user\source\repos\Tute\Tute;C:\Users\Kash user\source\repos\Tute\Tute\src;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\Kash user\source\repos\Tute\Tute;C:\Users\Kash user\source\repos\Tute\Tute\src;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\Kash user\source\repos\Tute\Tute;C:\Users\Kash user\source\repos\Tute\Tute\src;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

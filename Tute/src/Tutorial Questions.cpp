@@ -26,7 +26,6 @@ public:
 	}
 
 	void moveByVector(const Vector3d &v);
-
 };
 
 class Vector3d
@@ -55,6 +54,7 @@ void Point3d::moveByVector(const Vector3d &v)
 	m_y += v.m_y;
 	m_z += v.m_z;
 }
+
 
 int main()
 {

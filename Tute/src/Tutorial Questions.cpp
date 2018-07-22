@@ -2,45 +2,24 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include <cstdlib>
-#include <ctime>
 #include <cassert>
+#include <ctime> // for time()
+#include <cstdlib> // for rand() and srand()
 
 
+#include "Monster.h"
+#include "MonsterGenerator.h"
 
-class HelloWorld
-{
-private:
-	char *m_data;
 
-public:
-	HelloWorld()
-	{
-		m_data = new char[14];
-		const char *init = "Hello, World!";
-		for (int i = 0; i < 14; ++i)
-			m_data[i] = init[i];
-	}
-
-	~HelloWorld()
-	{
-		// replace this comment with your destructor implementation
-		delete[] m_data;
-	}
-
-	void print() const
-	{
-		std::cout << m_data;
-	}
-
-};
 
 int main()
 {
 	
+	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
+	rand(); // If using Visual Studio, discard first random value
 
-	HelloWorld hello;
-	hello.print();
+	Monster m = MonsterGenerator::generateMonster();
+	m.print();
 
 	
 	//std::cin.ignore(32767, '\n');

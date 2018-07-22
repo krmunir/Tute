@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 
 class Point2d
 {
@@ -11,5 +9,6 @@ private:
 public:
 	Point2d(double x=0.0, double y=0.0) : m_x{ x }, m_y{ y } {}
 	void print();
+	float distanceTo(Point2d &p2);
 };
 

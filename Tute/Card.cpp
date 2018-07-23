@@ -63,6 +63,7 @@ Deck::Deck() {
 			m_deck[card].m_rank = static_cast<Card::CardRank>(rank);
 			++card;
 		}
+	m_cardIndex = 0;
 }
 
 void Deck::printDeck()
@@ -102,4 +103,9 @@ void Deck::shuffleDeck()
 		// Swap it with the current card
 		swapCard(m_deck[index], m_deck[swapIndex]);
 	}
+	m_cardIndex = 0;
+}
+
+const Card& Deck::dealCard() {
+	return (m_deck[m_cardIndex++]);
 }

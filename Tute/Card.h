@@ -43,16 +43,18 @@ public:
 };
 
 
-//4b) Okay, now let’s work on a Deck class.The deck needs to hold 52 cards, so use a private std::array member to create a fixed array of 52 cards named m_deck.Second, create a constructor that takes no parameters and initializes m_deck with one of each card(modify the code from the original main() function).Inside the initialization loop, create an anonymous Card object and assign it to your deck element.Third, move printDeck into the Deck class as a public member.Fourth, move getRandomNumber() and swapCard() into the Deck class as a private static members(they’re just helper functions, so they don’t need access to *this).Fifth, move shuffleDeck into the class as a public member.
+//Create a public member function named dealCard(), which should return a const reference to the current card and advance the index. shuffleDeck() should also be updated to reset m_cardIndex (since if you shuffle the deck, you’ll start dealing from the top of the deck again).
 
 class Deck{
 private:
 	std::array<Card,52> m_deck;
+	int m_cardIndex;
 
 public:
 	 Deck();
 	 void printDeck();
 	 void shuffleDeck();
+	 const Card& dealCard();
 
 private:
 	static void swapCard(Card &a, Card &b);

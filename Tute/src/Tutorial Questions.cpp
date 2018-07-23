@@ -9,21 +9,6 @@
 #include "Card.h"
 
 
-/*
-
-
-struct Card
-{
-	CardRank rank;
-	CardSuit suit;
-};
-
-
-
-
-
-
-
 
 char getPlayerChoice()
 {
@@ -37,21 +22,21 @@ char getPlayerChoice()
 	return choice;
 }
 
-bool playBlackjack(const std::array<Card, 52> deck)
+bool playBlackjack(Deck deck)
 {
 	// Set up the initial game state
-	const Card *cardPtr = &deck[0];
+	//const Card *cardPtr = &deck[0];
 
 	int playerTotal = 0;
 	int dealerTotal = 0;
-
+	
 	// Deal the dealer one card
-	dealerTotal += getCardValue(*cardPtr++);
+	dealerTotal += deck.dealCard().getCardValue();
 	std::cout << "The dealer is showing: " << dealerTotal << '\n';
 
 	// Deal the player two cards
-	playerTotal += getCardValue(*cardPtr++);
-	playerTotal += getCardValue(*cardPtr++);
+	playerTotal += deck.dealCard().getCardValue();
+	playerTotal += deck.dealCard().getCardValue();
 
 	// Player goes first
 	while (1)
@@ -61,7 +46,7 @@ bool playBlackjack(const std::array<Card, 52> deck)
 		if (choice == 's')
 			break;
 
-		playerTotal += getCardValue(*cardPtr++);
+		playerTotal += deck.dealCard().getCardValue();
 
 		// See if the player busted
 		if (playerTotal > 21)
@@ -71,7 +56,7 @@ bool playBlackjack(const std::array<Card, 52> deck)
 	// If player hasn't busted, dealer goes until he has at least 17 points
 	while (dealerTotal < 17)
 	{
-		dealerTotal += getCardValue(*cardPtr++);
+		dealerTotal += deck.dealCard().getCardValue();
 		std::cout << "The dealer now has: " << dealerTotal << '\n';
 	}
 
@@ -82,33 +67,28 @@ bool playBlackjack(const std::array<Card, 52> deck)
 	return (playerTotal > dealerTotal);
 }
 
-*/
+
 
 int main()
 {
-/*
-	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
-	rand(); // if using visual studio, discard first random value
-
-	std::array<card, 52> deck;
 
 
-	shuffledeck(deck);
-
-	if (playblackjack(deck))
-		std::cout << "you win!\n";
-	else
-		std::cout << "you lose!\n";
-
-*/
 
 	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
 	rand(); // If using Visual Studio, discard first random value
 
 	Deck deck;
-	deck.printDeck();
 	deck.shuffleDeck();
 	deck.printDeck();
+	//std::cout << "the first card has value: " << deck.dealcard().getcardvalue() << '\n';
+	//std::cout << "the second card has value: " << deck.dealcard().getcardvalue() << '\n';
+
+	if (playBlackjack(deck))
+		std::cout << "you win!\n";
+	else
+		std::cout << "you lose!\n";
+
+
 
 	
 	std::cin.ignore(32767, '\n');

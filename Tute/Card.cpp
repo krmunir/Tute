@@ -52,3 +52,54 @@ int Card::getCardValue() const
 
 	return 0;
 }
+
+Deck::Deck() {
+	// we could initialize each card individually, but that would be a pain. let's use a loop.
+	int card = 0;
+	for (int suit = 0; suit < Card::CardSuit::MAX_SUITS; ++suit)
+		for (int rank = 0; rank < Card::CardRank::MAX_RANKS; ++rank)
+		{
+			m_deck[card].m_suit = static_cast<Card::CardSuit>(suit);
+			m_deck[card].m_rank = static_cast<Card::CardRank>(rank);
+			++card;
+		}
+}
+
+void Deck::printDeck()
+{
+	for (const auto &card : m_deck)
+	{
+		card.printCard();
+		std::cout << ' ';
+	}
+
+	std::cout << '\n';
+}
+
+void Deck::swapCard(Card &a, Card &b)
+{
+	Card temp = a;
+	a = b;
+	b = temp;
+}
+
+// Generate a random number between min and max (inclusive)
+// Assumes srand() has already been called
+int Deck::getRandomNumber(int min, int max)
+{
+	static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);  // static used for efficiency, so we only calculate this value once
+																				 // evenly distribute the random number across our range
+	return static_cast<int>(rand() * fraction * (max - min + 1) + min);
+}
+
+void Deck::shuffleDeck()
+{
+	// Step through each card in the deck
+	for (int index = 0; index < 52; ++index)
+	{
+		// Pick a random card, any card
+		int swapIndex = getRandomNumber(0, 51);
+		// Swap it with the current card
+		swapCard(m_deck[index], m_deck[swapIndex]);
+	}
+}

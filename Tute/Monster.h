@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string>
 
+//class MonsterGenerator;
+#include "MonsterGenerator.h"
+
 class Monster
 {
 
@@ -36,6 +39,8 @@ public:
 
 	std::string getTypeString();
 	void print();
+	friend Monster MonsterGenerator::generateMonster();
+
 
 };
 

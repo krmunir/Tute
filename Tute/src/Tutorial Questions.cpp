@@ -18,9 +18,12 @@ int main()
 	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
 	rand(); // If using Visual Studio, discard first random value
 
-	Monster m = MonsterGenerator::generateMonster();
-	m.print();
+	for (int i = 0; i < 20; ++i)
+	{
+		Monster m = MonsterGenerator::generateMonster();
+		m.print();
 
+	}
 	
 	//std::cin.ignore(32767, '\n');
 	std::cin.get();

@@ -17,7 +17,7 @@ public:
 	}
 	friend Fraction operator*(Fraction f, int i);
 	friend Fraction operator*(Fraction f1, Fraction f2);
-	friend std::ostream &operator<<(std::ostream &out, Fraction &f);
+	friend std::ostream &operator<<(std::ostream &out, const Fraction &f);
 	friend std::istream &operator>>(std::istream &in, Fraction &f);
 private:
 	int gcd(int a, int b) {

@@ -56,7 +56,7 @@ Fraction operator*(Fraction f1, Fraction f2) {
 
 }
 
-std::ostream &operator<<(std::ostream &out, Fraction &f) {
+std::ostream &operator<<(std::ostream &out, const Fraction &f) {
 	out << f.m_num << " / " << f.m_den << " ";
 	return out;
 }

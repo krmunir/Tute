@@ -8,33 +8,25 @@
 
 #include "..\Fraction.h"
 
-Fraction operator*(Fraction f, int i);
-Fraction operator*(Fraction f1, Fraction f2);
+//Fraction operator*(Fraction f, int i);
+//Fraction operator*(Fraction f1, Fraction f2);
 
 
 int main()
 {
 	
-	Fraction f1(2, 5);
-	f1.print();
+	Fraction f1;
+	std::cout << "Enter fraction 1: ";
+	std::cin >> f1;
 
-	Fraction f2(3, 8);
-	f2.print();
+	Fraction f2;
+	std::cout << "Enter fraction 2: ";
+	std::cin >> f2;
 
-	Fraction f3 = f1 * f2;
-	f3.print();
-
-	Fraction f4 = f1 * 2;
-	f4.print();
-
-	Fraction f5 = 2 * f2;
-	f5.print();
-
-	Fraction f6 = Fraction(1, 2) * Fraction(2, 3) * Fraction(3, 4);
-	f6.print();
+	std::cout << f1 << " * " << f2 << " is " << f1 * f2 << '\n';
 
 
-	//std::cin.ignore(32767, '\n');
+	std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
@@ -62,4 +54,14 @@ Fraction operator*(Fraction f1, Fraction f2) {
 
 	return result;
 
+}
+
+std::ostream &operator<<(std::ostream &out, Fraction &f) {
+	out << f.m_num << " / " << f.m_den << " ";
+	return out;
+}
+
+std::istream &operator>>(std::istream &in, Fraction &f) {
+	in >> f.m_num >> f.m_den;
+	return in;
 }

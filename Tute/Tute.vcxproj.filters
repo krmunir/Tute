@@ -18,12 +18,12 @@
     <ClCompile Include="src\Tutorial Questions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GradeMap.cpp">
+    <ClCompile Include="MyString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GradeMap.h">
+    <ClInclude Include="MyString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

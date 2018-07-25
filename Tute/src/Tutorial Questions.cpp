@@ -6,17 +6,14 @@
 #include <ctime>
 #include <cassert>
 
-#include "..\GradeMap.h"
+#include "..\MyString.h"
 
 
 int main()
 {
 
-	GradeMap grades;
-	grades["Joe"] = 'A';
-	grades["Frank"] = 'B';
-	std::cout << "Joe has a grade of " << grades["Joe"] << '\n';
-	std::cout << "Frank has a grade of " << grades["Frank"] << '\n';
+	MyString string("Hello, world!");
+	std::cout << string(7, 5); // start at index 7 and return 5 characters
 
 
 	std::cin.ignore(32767, '\n');

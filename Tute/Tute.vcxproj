@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyString.cpp" />
+    <ClCompile Include="Average.cpp" />
     <ClCompile Include="src\Tutorial Questions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyString.h" />
+    <ClInclude Include="Average.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -18,12 +18,12 @@
     <ClCompile Include="src\Tutorial Questions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyString.cpp">
+    <ClCompile Include="Average.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyString.h">
+    <ClInclude Include="Average.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

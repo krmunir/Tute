@@ -5,32 +5,30 @@
 #include "IntArray.h"
 
 
-IntArray::IntArray(int size)
+IntArray::IntArray(int size): m_arraySize{size}
 {
-	assert(size >= 0 && "Array size must be greater than or equal to zero");
+	assert(size > 0 && "Array size must be greater than zero");
 	
-	m_array = new (std::nothrow) int(size);
-	assert(m_array != nullptr&&"Error allocating memory to array");
-
-	m_arraySize = size;
+	m_array = new int[m_arraySize] {0};
+	
 	std::cout << "Array dynamically created of size : " << m_arraySize << std::endl;
 }
 
 
 IntArray::~IntArray()
 {
-	delete m_array;
+	delete[] m_array;
 	std::cout << "Dynamically created array has been deleted!" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const IntArray arr) {
 	for (int i = 0; i < arr.m_arraySize; ++i)
 	{
-		std::cout << arr.m_array[i] << " ";
+		out << arr.m_array[i] << " ";
 	}
 	return out;
 }
 
 int& IntArray::operator[](int elementNum) {
-	return m_array[elementNum];
+	return *(m_array + elementNum);
 }

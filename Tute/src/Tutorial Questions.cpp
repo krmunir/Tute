@@ -30,8 +30,8 @@ int main()
 	std::cout << a << '\n';
 
 	IntArray b(1);
-	//a = a;
-	//b = a;
+	a = a;
+	b = a;
 
 	std::cout << b << '\n';
 

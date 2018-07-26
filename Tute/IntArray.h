@@ -5,11 +5,22 @@
 class IntArray
 {
 private:
-	int *m_array;
-	int m_arraySize;
+	int *m_array = nullptr;
+	int m_arraySize = 0;
 public:
 	IntArray(int size);
 	~IntArray();
+	// Copy constructor that does a deep copy
+	IntArray(const IntArray &array) :
+		m_arraySize(array.m_arraySize)
+	{
+		// Allocate a new array
+		m_array = new int[m_arraySize];
+
+		// Copy elements from original array to new array
+		for (int count = 0; count < array.m_arraySize; ++count)
+			m_array[count] = array.m_array[count];
+	}
 	friend std::ostream& operator<<(std::ostream& out, const IntArray arr);
 	int& operator[](int elementNum);
 };

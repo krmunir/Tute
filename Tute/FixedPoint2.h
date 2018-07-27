@@ -2,7 +2,11 @@
 
 #include <cstdint>
 
-//Write a class named FixedPoint2 that implements the recommended solution from the previous question. If either (or both) of the non-fractional and fractional part of the number are negative, the number should be treated as negative. Provide the overloaded operators and constructors required for the following program to run:
+//now add a constructor that takes a double. You can round a number (on the left of the decimal) by using the round() function (included in header cmath).
+//
+//Hint: You can get the non - fractional part of a double by static casting the double to an integer
+//	Hint : To get the fractional part of a double, you’ll first need to zero - out the non - fractional part.Use the integer value to do this.
+//	Hint : You can move a digit from the right of the decimal to the left of the decimal by multiplying by 10. You can move it two digits by multiplying by 100. as negative. Provide the overloaded operators and constructors required for the following program to run:
 class FixedPoint2
 {
 private:
@@ -18,6 +22,7 @@ public:
 			if (!(m_wholeNum < 0))
 				m_wholeNum = -m_wholeNum;
 	}
+	FixedPoint2(double num);
 	friend std::ostream& operator<<(std::ostream& out, FixedPoint2& fp);
 	operator double() {
 		double resultnotinit;

@@ -13,22 +13,17 @@
 
 int main()
 {
-	FixedPoint2 a(34, 56);
+	FixedPoint2 a(0.01);
 	std::cout << a << '\n';
 
-	FixedPoint2 b(-2, 8);
+	FixedPoint2 b(-0.01);
 	std::cout << b << '\n';
 
-	FixedPoint2 c(2, -8);
+	FixedPoint2 c(5.01); // stored as 5.0099999... so we'll need to round this
 	std::cout << c << '\n';
 
-	FixedPoint2 d(-2, -8);
+	FixedPoint2 d(-5.01); // stored as -5.0099999... so we'll need to round this
 	std::cout << d << '\n';
-
-	FixedPoint2 e(0, -5);
-	std::cout << e << '\n';
-
-	std::cout << static_cast<double>(e) << '\n';
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();

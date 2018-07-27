@@ -2,11 +2,11 @@
 
 #include <cstdint>
 
-//now add a constructor that takes a double. You can round a number (on the left of the decimal) by using the round() function (included in header cmath).
-//
-//Hint: You can get the non - fractional part of a double by static casting the double to an integer
-//	Hint : To get the fractional part of a double, you’ll first need to zero - out the non - fractional part.Use the integer value to do this.
-//	Hint : You can move a digit from the right of the decimal to the left of the decimal by multiplying by 10. You can move it two digits by multiplying by 100. as negative. Provide the overloaded operators and constructors required for the following program to run:
+//Overload operator==, operator >>, operator- (unary), and operator+ (binary)
+//Hint: Add your two FixedPoint2 together by leveraging the double cast, adding the results, and converting back to a FixedPoint2.
+//Hint: For operator>>, use your double constructor to create an anonymous object of type FixedPoint2, and assign it to your FixedPoint2 function parameter
+
+
 class FixedPoint2
 {
 private:
@@ -23,12 +23,25 @@ public:
 				m_wholeNum = -m_wholeNum;
 	}
 	FixedPoint2(double num);
-	friend std::ostream& operator<<(std::ostream& out, FixedPoint2& fp);
+	friend std::ostream& operator<<(std::ostream& out, const FixedPoint2& fp);
 	operator double() {
 		double resultnotinit;
 		double result{};
 		result = static_cast<double>(m_wholeNum) + (static_cast<double>(m_fraction) / 100);
 		return result;
 	}
+	friend bool operator==(FixedPoint2& fp1, FixedPoint2& fp2);
+	friend std::istream& operator>>(std::istream& in, FixedPoint2& fp);
+	FixedPoint2& operator-() {
+		int16_t whole{-m_wholeNum};
+		int8_t frac{-m_fraction};
+		FixedPoint2 result{ whole, frac };
+		return result;
+
+
+
+
+	}
+	friend FixedPoint2& operator+(FixedPoint2& fp1, FixedPoint2& fp2);
 };
 

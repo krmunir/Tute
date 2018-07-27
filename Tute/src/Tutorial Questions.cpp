@@ -9,21 +9,21 @@
 
 #include "..\FixedPoint2.h"
 
-
+void testAddition();
 
 int main()
 {
-	FixedPoint2 a(0.01);
+	testAddition();
+
+	FixedPoint2 a(-0.48);
 	std::cout << a << '\n';
 
-	FixedPoint2 b(-0.01);
-	std::cout << b << '\n';
+	std::cout << -a << '\n';
 
-	FixedPoint2 c(5.01); // stored as 5.0099999... so we'll need to round this
-	std::cout << c << '\n';
+	std::cout << "Enter a number: "; // enter 5.678
+	std::cin >> a;
 
-	FixedPoint2 d(-5.01); // stored as -5.0099999... so we'll need to round this
-	std::cout << d << '\n';
+	std::cout << "You entered: " << a << '\n';
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
@@ -32,6 +32,19 @@ int main()
 }
 
 
+void testAddition()
+{
+	// h/t to reader Sharjeel Safdar for this function
+	std::cout << std::boolalpha;
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.23) == FixedPoint2(1.98)) << '\n'; // both positive, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.50) == FixedPoint2(2.25)) << '\n'; // both positive, with decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.23) == FixedPoint2(-1.98)) << '\n'; // both negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.50) == FixedPoint2(-2.25)) << '\n'; // both negative, with decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.23) == FixedPoint2(-0.48)) << '\n'; // second negative, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.50) == FixedPoint2(-0.75)) << '\n'; // second negative, possible decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.23) == FixedPoint2(0.48)) << '\n'; // first negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.50) == FixedPoint2(0.75)) << '\n'; // first negative, possible decimal overflow
+}
 
 
 

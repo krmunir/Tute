@@ -3,7 +3,7 @@
 
 #include "FixedPoint2.h"
 
-std::ostream& operator<<(std::ostream& out, FixedPoint2& fp) {
+std::ostream& operator<<(std::ostream& out, const FixedPoint2& fp) {
 	double result{};
 	result = static_cast<double>(fp.m_wholeNum) + (static_cast<double>(fp.m_fraction) / 100);
 	out << result << std::endl;
@@ -21,3 +21,30 @@ FixedPoint2::FixedPoint2(double num) {
 	m_wholeNum = static_cast<int>(temp);
 	m_fraction = static_cast<int>(b)%100;
 }
+
+bool operator==(FixedPoint2& fp1, FixedPoint2& fp2) {
+	if ((fp1.m_wholeNum == fp2.m_wholeNum) && (fp1.m_fraction == fp2.m_fraction))
+		return true;
+	else
+		return false;
+}
+
+std::istream& operator>>(std::istream& in, FixedPoint2& fp) {
+	double num;
+	in >> num;
+	double b = round(100 * num);
+	double temp = b / 100;
+	fp.m_wholeNum = static_cast<int>(temp);
+	fp.m_fraction = static_cast<int>(b) % 100;
+	return in;
+}
+
+FixedPoint2& operator+(FixedPoint2& fp1, FixedPoint2& fp2) {
+	double num1{static_cast<double>(fp1)};
+	double num2{static_cast<double>(fp2)};
+	FixedPoint2 result{ num1 + num2 };
+	return result;
+}
+
+
+

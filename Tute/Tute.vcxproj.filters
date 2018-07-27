@@ -18,12 +18,12 @@
     <ClCompile Include="src\Tutorial Questions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IntArray.cpp">
+    <ClCompile Include="FixedPoint2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IntArray.h">
+    <ClInclude Include="FixedPoint2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

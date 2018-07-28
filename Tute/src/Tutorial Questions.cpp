@@ -6,45 +6,79 @@
 #include <ctime>
 #include <cassert>
 #include <cstdint>
+#include <vector>
 
-#include "..\FixedPoint2.h"
 
-void testAddition();
+class Teacher
+{
+private:
+	std::string m_name;
+
+public:
+	Teacher(std::string name)
+		: m_name(name)
+	{
+	}
+
+	std::string getName() { return m_name; }
+};
+
+class Department
+{
+private:
+	std::vector<Teacher*> m_teachers;
+public:
+	/*Department(Teacher *teacher = nullptr)
+	{
+		m_teachers.push_back(teacher);
+	}*/
+	void add(Teacher *teacher) {
+		m_teachers.push_back(teacher);
+	}
+	friend std::ostream& operator<<(std::ostream&, const Department& dept);
+};
+
+std::ostream& operator<<(std::ostream& out, const Department& dept) {
+	
+	out << "Department: ";
+	for (Teacher *teacher : dept.m_teachers)
+		if (teacher)
+			out << teacher->getName()<<" ";
+	out << std::endl;
+	return out;
+}
 
 int main()
 {
-	testAddition();
+	// Create a teacher outside the scope of the Department
+	Teacher *t1 = new Teacher("Bob"); // create a teacher
+	Teacher *t2 = new Teacher("Frank");
+	Teacher *t3 = new Teacher("Beth");
 
-	FixedPoint2 a(-0.48);
-	std::cout << a << '\n';
+	{
+		// Create a department and use the constructor parameter to pass
+		// the teacher to it.
+		Department dept; // create an empty Department
+		dept.add(t1);
+		dept.add(t2);
+		dept.add(t3);
 
-	std::cout << -a << '\n';
+		std::cout << dept;
 
-	std::cout << "Enter a number: "; // enter 5.678
-	std::cin >> a;
+	} // dept goes out of scope here and is destroyed
 
-	std::cout << "You entered: " << a << '\n';
+	std::cout << t1->getName() << " still exists!\n";
+	std::cout << t2->getName() << " still exists!\n";
+	std::cout << t3->getName() << " still exists!\n";
+
+	delete t1;
+	delete t2;
+	delete t3;
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
 
 	return 0;
 }
-
-
-void testAddition()
-{
-	// h/t to reader Sharjeel Safdar for this function
-	std::cout << std::boolalpha;
-	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.23) == FixedPoint2(1.98)) << '\n'; // both positive, no decimal overflow
-	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.50) == FixedPoint2(2.25)) << '\n'; // both positive, with decimal overflow
-	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.23) == FixedPoint2(-1.98)) << '\n'; // both negative, no decimal overflow
-	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.50) == FixedPoint2(-2.25)) << '\n'; // both negative, with decimal overflow
-	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.23) == FixedPoint2(-0.48)) << '\n'; // second negative, no decimal overflow
-	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.50) == FixedPoint2(-0.75)) << '\n'; // second negative, possible decimal overflow
-	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.23) == FixedPoint2(0.48)) << '\n'; // first negative, no decimal overflow
-	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.50) == FixedPoint2(0.75)) << '\n'; // first negative, possible decimal overflow
-}
-
 
 

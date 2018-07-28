@@ -32,7 +32,7 @@ public:
 	}
 	friend bool operator==(FixedPoint2& fp1, FixedPoint2& fp2);
 	friend std::istream& operator>>(std::istream& in, FixedPoint2& fp);
-	FixedPoint2& operator-() {
+	FixedPoint2 operator-() {
 		int16_t whole{-m_wholeNum};
 		int8_t frac{-m_fraction};
 		FixedPoint2 result{ whole, frac };
@@ -42,6 +42,6 @@ public:
 
 
 	}
-	friend FixedPoint2& operator+(FixedPoint2& fp1, FixedPoint2& fp2);
+	friend FixedPoint2 operator+(FixedPoint2& fp1, FixedPoint2& fp2);
 };
 

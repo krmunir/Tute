@@ -39,7 +39,7 @@ std::istream& operator>>(std::istream& in, FixedPoint2& fp) {
 	return in;
 }
 
-FixedPoint2& operator+(FixedPoint2& fp1, FixedPoint2& fp2) {
+FixedPoint2 operator+(FixedPoint2& fp1, FixedPoint2& fp2) {
 	double num1{static_cast<double>(fp1)};
 	double num2{static_cast<double>(fp2)};
 	FixedPoint2 result{ num1 + num2 };

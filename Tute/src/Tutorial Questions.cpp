@@ -7,73 +7,25 @@
 #include <cassert>
 #include <cstdint>
 #include <vector>
+#include <initializer_list>
+#include <assert.h>
 
 
-class Teacher
-{
-private:
-	std::string m_name;
+#include "..\IntArray.h"
 
-public:
-	Teacher(std::string name)
-		: m_name(name)
-	{
-	}
-
-	std::string getName() { return m_name; }
-};
-
-class Department
-{
-private:
-	std::vector<Teacher*> m_teachers;
-public:
-	/*Department(Teacher *teacher = nullptr)
-	{
-		m_teachers.push_back(teacher);
-	}*/
-	void add(Teacher *teacher) {
-		m_teachers.push_back(teacher);
-	}
-	friend std::ostream& operator<<(std::ostream&, const Department& dept);
-};
-
-std::ostream& operator<<(std::ostream& out, const Department& dept) {
-	
-	out << "Department: ";
-	for (Teacher *teacher : dept.m_teachers)
-		if (teacher)
-			out << teacher->getName()<<" ";
-	out << std::endl;
-	return out;
-}
 
 int main()
 {
-	// Create a teacher outside the scope of the Department
-	Teacher *t1 = new Teacher("Bob"); // create a teacher
-	Teacher *t2 = new Teacher("Frank");
-	Teacher *t3 = new Teacher("Beth");
+	IntArray array{ 5, 4, 3, 2, 1 }; // initializer list
+	for (int count = 0; count < array.getLength(); ++count)
+		std::cout << array[count] << ' ';
 
-	{
-		// Create a department and use the constructor parameter to pass
-		// the teacher to it.
-		Department dept; // create an empty Department
-		dept.add(t1);
-		dept.add(t2);
-		dept.add(t3);
+	std::cout << '\n';
 
-		std::cout << dept;
+	array = { 1, 3, 5, 7, 9, 11 };
 
-	} // dept goes out of scope here and is destroyed
-
-	std::cout << t1->getName() << " still exists!\n";
-	std::cout << t2->getName() << " still exists!\n";
-	std::cout << t3->getName() << " still exists!\n";
-
-	delete t1;
-	delete t2;
-	delete t3;
+	for (int count = 0; count < array.getLength(); ++count)
+		std::cout << array[count] << ' ';
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();

@@ -15,14 +15,13 @@
 
 int main()
 {
-	const Apple a("Red delicious", "red", 4.2);
-	std::cout << a;
+	Apple a("red");
+	Banana b;
+	GrannySmith c;
 
-	const Banana b("Cavendish", "yellow");
-	std::cout << b;
-
-	Banana b2("Banana name", "bright yellow");
-	std::cout << b2;
+	std::cout << "My " << a.getName() << " is " << a.getColour() << ".\n";
+	std::cout << "My " << b.getName() << " is " << b.getColour() << ".\n";
+	std::cout << "My " << c.getName() << " is " << c.getColour() << ".\n";
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();

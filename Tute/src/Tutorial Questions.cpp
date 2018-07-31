@@ -10,18 +10,18 @@
 #include <initializer_list>
 #include <assert.h>
 
-#include"..\Fruit.h"
-
+#include "Creature.h"
 
 int main()
 {
-	Apple a("red");
-	Banana b;
-	GrannySmith c;
+	std::string name;
 
-	std::cout << "My " << a.getName() << " is " << a.getColour() << ".\n";
-	std::cout << "My " << b.getName() << " is " << b.getColour() << ".\n";
-	std::cout << "My " << c.getName() << " is " << c.getColour() << ".\n";
+	std::cout << "Enter your name: ";
+	std::cin >> name;
+	
+	Player player{ name };
+	std::cout << "Welcome, " << name << std::endl;
+	std::cout << "You have " << player.getHealth() << " health and are carrying " << player.getGold() << " gold.";
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();

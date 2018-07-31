@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IntArray.cpp" />
+    <ClCompile Include="Fruit.cpp" />
     <ClCompile Include="src\Tutorial Questions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IntArray.h" />
+    <ClInclude Include="Fruit.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

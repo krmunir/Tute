@@ -10,22 +10,19 @@
 #include <initializer_list>
 #include <assert.h>
 
-
-#include "..\IntArray.h"
+#include"..\Fruit.h"
 
 
 int main()
 {
-	IntArray array{ 5, 4, 3, 2, 1 }; // initializer list
-	for (int count = 0; count < array.getLength(); ++count)
-		std::cout << array[count] << ' ';
+	const Apple a("Red delicious", "red", 4.2);
+	std::cout << a;
 
-	std::cout << '\n';
+	const Banana b("Cavendish", "yellow");
+	std::cout << b;
 
-	array = { 1, 3, 5, 7, 9, 11 };
-
-	for (int count = 0; count < array.getLength(); ++count)
-		std::cout << array[count] << ' ';
+	Banana b2("Banana name", "bright yellow");
+	std::cout << b2;
 
 	std::cin.ignore(32767, '\n');
 	std::cin.get();

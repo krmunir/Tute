@@ -2,7 +2,11 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib> // for rand() and srand()
+#include <ctime> // for time()
 
+
+int getRandomNumber(int min, int max);
 
 //First create the Creature class.Creatures have 5 attributes : A name(std::string), a symbol(a char), an amount of health(int), the amount of damage they do per attack(int), and the amount of gold they are carrying(int).Implement these as class members.Write a full set of getters(a get function for each member).Add three other functions : void reduceHealth(int) reduces the Creature's health by an integer amount. bool isDead() returns true when the Creature's health is 0 or less. void addGold(int) adds gold to the Creature.
 
@@ -66,6 +70,17 @@ public:
 		int gold;
 	};
 	static MonsterData monsterData[MAX_TYPES];
+
+	//m_name{ name }, m_symbol{ symbol }, m_health{ health }, m_damage{ damage }, m_gold{ gold } {}
+	Monster(Type type) : Creature(monsterData[type].name, monsterData[type].symbol, monsterData[type].health, monsterData[type].damage, monsterData[type].gold) {}
+
+	//add a static function to Monster named getRandomMonster(). This function should pick a random number between 0 and MAX_TYPES-1 and return a monster (by value) with that Type (you'll need to static_cast the int to a Type to pass it to the Monster constructor).
+	static Monster getRandomMonster() {
+		Type monsType{};
+		monsType = static_cast<Type>(getRandomNumber(0, MAX_TYPES - 1));
+		return Monster{ monsType };
+	}
+
 };
 
 
@@ -89,4 +104,11 @@ Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
 	{ "slime", 's', 1, 1, 10 }
 };
 
-
+// Generate a random number between min and max (inclusive)
+// Assumes srand() has already been called
+int getRandomNumber(int min, int max)
+{
+	static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);  // static used for efficiency, so we only calculate this value once
+																				 // evenly distribute the random number across our range
+	return static_cast<int>(rand() * fraction * (max - min + 1) + min);
+}

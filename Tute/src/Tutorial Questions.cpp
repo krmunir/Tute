@@ -14,15 +14,14 @@
 
 int main()
 {
-	std::string name;
+	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
+	rand(); // get rid of first result
 
-	std::cout << "Enter your name: ";
-	std::cin >> name;
-	
-	Player player{ name };
-	std::cout << "Welcome, " << name << std::endl;
-	std::cout << "You have " << player.getHealth() << " health and are carrying " << player.getGold() << " gold.";
-
+	for (int i = 0; i < 10; ++i)
+	{
+		Monster m = Monster::getRandomMonster();
+		std::cout << "A " << m.getName() << " (" << m.getSymbol() << ") was created.\n";
+	}
 	std::cin.ignore(32767, '\n');
 	std::cin.get();
 

@@ -10,102 +10,79 @@
 #include <initializer_list>
 #include <assert.h>
 
-#include "Creature.h"
 
-void fightMonster();
 
-enum class GameStatus {
-	IN_PROGRESS,
-	PLAYER_WON,
-	PLAYER_DIED
+//Create an abstract class named Shape. This class should have three functions: a pure virtual print function that takes and returns a std::ostream, an overloaded operator<< and an empty virtual destructor.
+class Shape {
+private:
+protected:
+public:
+	virtual std::ostream& print(std::ostream& out) const = 0;
+	friend std::ostream& operator<<(std::ostream& out, Shape &shape) const { return shape.print(out); }
+	virtual ~Shape() {}
 };
 
-int main()
+class Point
 {
-	GameStatus status{ GameStatus::IN_PROGRESS };
+private:
+	int m_x = 0;
+	int m_y = 0;
+	int m_z = 0;
 
-	std::string playerName{};
+public:
+	Point(int x, int y, int z)
+		: m_x(x), m_y(y), m_z(z)
+	{
 
-	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
-	rand(); // get rid of first result
+	}
 
-	std::cout << "What is your name? ";
-	std::cin >> playerName;
-	Player player(playerName);
-	std::cout << "Welcome, " << player.getName() << "." << std::endl;
+	friend std::ostream& operator<<(std::ostream &out, const Point &p)
+	{
+		out << "Point(" << p.m_x << ", " << p.m_y << ", " << p.m_z << ")";
+		return out;
+	}
+};
 
-	while (status == GameStatus::IN_PROGRESS) {
-		Monster currMonster = Monster::getRandomMonster();
-		std::cout << "You have encountered a " << currMonster.getName() << " (" << currMonster.getSymbol() << ")" << std::endl;
-
-		status = fightMonster(player, currMonster);
-
+class Circle : public Shape {
+private:
+	Point m_centre{};
+	int radius{};
+public:
+	Circle(Point p,int r):m_centre{p}
+	virtual  std::ostream& print(std::ostream& out) const override {
 
 	}
 
 
+};
+
+class Triangle : public Shape {
+private:
+	Point m_p1{ 0,0,0 };
+	Point m_p2{ 0,0,0 };
+	Point m_p3{ 0,0,0 };
+
+public:
+	virtual  std::ostream& print(std::ostream& out) const override {
+
+	}
+
+};
 
 
-	std::cin.ignore(32767, '\n');
-	std::cin.get();
+int main()
+{
+
+	Circle c(Point(1, 2, 3), 7);
+	std::cout << c << '\n';
+
+	Triangle t(Point(1, 2, 3), Point(4, 5, 6), Point(7, 8, 9));
+	std::cout << t << '\n';
 
 	return 0;
 }
 
 
-GameStatus fightMonster(Player& player, Monster& monster) {
-	char response;
-	bool inFight = true;
-
-	while (inFight) {
-		std::cout << "(r)un or (f)ight: ";
-		std::cin >> response;
-
-		if ('r' == response) {
-			//run
-			if (1 == getRandomNumber(0, 1)) {
-				//you got away
-				inFight = false;
-				return GameStatus::IN_PROGRESS;
-			}
-			else {
-				//you didnt get away
-				std::cout << "You failed to flee" << std::endl;
-				std::cout << "The " << monster.getName() << "hit you for " << monster.getDamage() << " damage" << std::endl;
-				player.reduceHealth(monster.getDamage());
-				if (player.getHealth() <= 0) {
-					inFight = false;
-					return GameStatus::PLAYER_DIED;
-				}
-			}
-		}
-		else if ('f' == response) {
-			//fight
-			std::cout << "You hit the " << monster.getName() << " for " << player.getDamage << " damage" << std::endl;
-			monster.reduceHealth(player.getDamage());
-			if (monster.getHealth() <= 0) {
-				//level up
-				player.levelUp();
-				player.addGold(monster.getGold());
-				std::cout << "You killed the " << monster.getName() << std::endl;
-				std::cout << "You are now on level " << player.getLevel() << std::endl;
-				std::cout << "You now have " << player.getGold() << " gold" << std::endl;
-				inFight = false;
-				return GameStatus::IN_PROGRESS;
-			}
-			std::cout << "The " << monster.getName() << "hit you for " << monster.getDamage() << " damage" << std::endl;
-			player.reduceHealth(monster.getDamage());
-			if (player.getHealth() <= 0) {
-				inFight = false;
-				return GameStatus::PLAYER_DIED;
-			}
-		}
-		else {
-			//invalid response
-			std::cout << "Invalid entry" << std::endl;
-		}
-	}
-}
 
 
 
